@@ -6,7 +6,7 @@ class Vessel {
 
   write(input, collection) {
     try {
-      this.preCreate();
+      this.preCreate(collection);
       fs.writeFileSync(`./${collection}.json`, JSON.stringify(input));
     } catch (error) {
       return new Response().error(error);
