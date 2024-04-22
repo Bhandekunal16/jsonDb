@@ -1,11 +1,7 @@
 const Application = require("./src/brain");
 
 function application() {
-  return new Application().props(
-    "79676276646d63667467",
-    { RAM: "6GB" },
-    "phone"
-  );
+  return new Application().getById("6c6c7472686e6a676e62", "phone");
 }
 
 console.log(application());

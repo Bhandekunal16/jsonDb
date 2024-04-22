@@ -2,6 +2,7 @@ const uuid = require("robotic.js/src/class/uuid");
 const Response = require("robotic.js/src/class/response");
 const Vessel = require("./vessels");
 const Heart = require("./heart");
+const { json } = require("stream/consumers");
 
 class Brain {
   write(input, collection) {
@@ -42,12 +43,10 @@ class Brain {
 
   getById(id, collection) {
     const array = JSON.parse(new Vessel().read(collection));
-    const response = [];
-    let obj = {};
+    let response = [];
     for (let index = 0; index < array.length; index++) {
-      array[index].id = id ? (obj = array[index]) : null;
+      array[index].id = id ? response.push(array[index]) : null;
     }
-    response.push(obj);
     return { records: response, timestamp: new Date() };
   }
 
