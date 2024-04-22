@@ -1,0 +1,36 @@
+[
+  {
+    "id": "7a737762646b766b6e6e",
+    "Brand": "Apple",
+    "Model": "iPhone 12",
+    "OperatingSystem": "iOS",
+    "ScreenSize": "6.1 inches",
+    "Resolution": "1170 x 2532 pixels",
+    "Processor": "Apple A14 Bionic",
+    "RAM": "4GB",
+    "StorageCapacity": "128GB",
+    "CameraResolution": "12 MP",
+    "BatteryCapacity": "2815 mAh",
+    "Connectivity": "5G",
+    "BiometricAuthentication": "Face ID",
+    "ColorOptions": "Red",
+    "AdditionalFeatures": "Water resistance"
+  },
+  {
+    "id": "79676276646d63667467",
+    "Brand": "Apple",
+    "Model": "iPhone 12",
+    "OperatingSystem": "iOS",
+    "ScreenSize": "6.1 inches",
+    "Resolution": "1170 x 2532 pixels",
+    "Processor": "Apple A14 Bionic",
+    "RAM": "6GB",
+    "StorageCapacity": "128GB",
+    "CameraResolution": "12 MP",
+    "BatteryCapacity": "2815 mAh",
+    "Connectivity": "5G",
+    "BiometricAuthentication": "Face ID",
+    "ColorOptions": "White",
+    "AdditionalFeatures": "Water resistance"
+  }
+]
