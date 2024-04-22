@@ -2,7 +2,6 @@ const uuid = require("robotic.js/src/class/uuid");
 const Response = require("robotic.js/src/class/response");
 const Vessel = require("./vessels");
 const Heart = require("./heart");
-const { json } = require("stream/consumers");
 
 class Brain {
   write(input, collection) {
@@ -76,8 +75,7 @@ class Brain {
   }
 
   count(collection) {
-    const count = this.read(collection);
-    return { recordCount: count.length };
+    return { recordCount: this.read(collection).length };
   }
 }
 
