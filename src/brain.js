@@ -42,11 +42,13 @@ class Brain {
 
   getById(id, collection) {
     const array = JSON.parse(new Vessel().read(collection));
+    const response = [];
     let obj = {};
     for (let index = 0; index < array.length; index++) {
       array[index].id = id ? (obj = array[index]) : null;
     }
-    return { records: obj, timestamp: new Date() };
+    response.push(obj);
+    return { records: response, timestamp: new Date() };
   }
 
   getByProperties(Object, collection) {
