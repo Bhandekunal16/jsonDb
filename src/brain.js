@@ -60,9 +60,8 @@ class Brain {
     if (targetObjIndex !== -1) {
       array[targetObjIndex][input] = value;
       new Vessel().write(array, collection);
-    } else {
-      new Response().notFound("Object with specified id not found.");
-    }
+    } else
+      return new Response().notFound("Object with specified id not found.");
   }
 
   props(id, newObj, collection) {
