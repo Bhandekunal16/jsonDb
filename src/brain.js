@@ -99,6 +99,11 @@ class Brain {
   ImportCsv(path, collection) {
     new kidney().readCsv(path, collection);
   }
+
+  ExportCsv(collection) {
+    const array = new Vessel().read(collection);
+    new Vessel().writeCsv(JSON.parse(array), collection);
+  }
 }
 
 module.exports = Brain;

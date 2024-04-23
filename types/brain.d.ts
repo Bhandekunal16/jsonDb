@@ -68,4 +68,6 @@ declare class Brain {
   unwind(array: any, collection: string): void;
 
   ImportCsv(path: string, collection: string): void;
+
+  ExportCsv(collection: string): void;
 }

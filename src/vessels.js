@@ -1,5 +1,6 @@
 const fs = require("fs");
 const Response = require("robotic.js/src/class/response");
+const heart = require("./heart");
 
 class Vessel {
   fileName = `./db.json`;
@@ -29,6 +30,17 @@ class Vessel {
     } catch (error) {
       return new Response().error(error);
     }
+  }
+
+  writeCsv(arrayOfObjects, collection) {
+    const csvData = new heart().convertArrayOfObjectsToCsv(arrayOfObjects);
+    fs.writeFile(`./${collection}.csv`, csvData, (err) => {
+      if (err) {
+        console.error("Error writing CSV file:", err);
+      } else {
+        console.log("CSV file has been written successfully.");
+      }
+    });
   }
 }
 

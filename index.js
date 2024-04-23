@@ -1,7 +1,7 @@
 const Application = require("./src/brain");
 
 function application() {
-  return new Application().ImportCsv("./bank.csv", "phone");
+  return new Application().ExportCsv("phone");
 }
 
 application();
