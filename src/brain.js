@@ -6,12 +6,9 @@ const kidney = require("./kidney");
 
 class Brain {
   write(input, collection) {
-    console.log(collection);
     try {
       new Vessel().preCreate(collection);
       const match = new Vessel().read(collection);
-
-      console.log(match);
       const array = [];
       const addedArray = [];
       if (match.trim() === "") {
@@ -21,9 +18,7 @@ class Brain {
         const match = JSON.parse(new Vessel().read(collection));
         addedArray.push({ id: new uuid().vectorized(), ...input });
         const finalArray = [...match, ...addedArray];
-        console.log(finalArray);
         new Vessel().write(finalArray, collection);
-        return true;
       }
     } catch (error) {
       return new Response().error(error);
@@ -32,10 +27,12 @@ class Brain {
 
   read(collection) {
     try {
-      const data = new Vessel().read(collection);
-      const res = JSON.parse(data);
-      const obj = { records: res, length: res.length, timestamp: new Date() };
-      return obj;
+      const data = JSON.parse(new Vessel().read(collection));
+      return {
+        records: data,
+        length: data.length,
+        timestamp: new Date(),
+      };
     } catch (error) {
       return new Response().error(error);
     }

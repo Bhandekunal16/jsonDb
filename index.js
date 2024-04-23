@@ -1,7 +1,8 @@
 const Application = require("./src/brain");
 
 function application() {
-  return new Application().ExportCsv("phone");
+  return new Application().read("phone");
 }
 
-application();
+console.log(application())
+
