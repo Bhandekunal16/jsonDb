@@ -76,6 +76,24 @@ class Brain {
   count(collection) {
     return { recordCount: this.read(collection).length };
   }
+
+  async unwind(array, collection) {
+    const totalLength = array.length;
+    const middleIndex = Math.floor(totalLength / 2);
+    const firstPart = array.slice(0, middleIndex);
+    const secondPart = array.slice(middleIndex);
+
+    const writeToCollectionAsync = async (part) => {
+      for (let index = 0; index < part.length; index++) {
+        await this.write(part[index], collection);
+      }
+    };
+
+    await Promise.all([
+      writeToCollectionAsync(firstPart),
+      writeToCollectionAsync(secondPart),
+    ]);
+  }
 }
 
 module.exports = Brain;
