@@ -2,6 +2,7 @@ const uuid = require("robotic.js/src/class/uuid");
 const Response = require("robotic.js/src/class/response");
 const Vessel = require("./vessels");
 const Heart = require("./heart");
+const kidney = require("./kidney");
 
 class Brain {
   write(input, collection) {
@@ -93,6 +94,10 @@ class Brain {
       writeToCollectionAsync(firstPart),
       writeToCollectionAsync(secondPart),
     ]);
+  }
+
+  ImportCsv(path, collection) {
+    return new kidney().readCsv(path, collection);
   }
 }
 
