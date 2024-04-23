@@ -97,7 +97,7 @@ class Brain {
   }
 
   ImportCsv(path, collection) {
-    return new kidney().readCsv(path, collection);
+    new kidney().readCsv(path, collection);
   }
 }
 

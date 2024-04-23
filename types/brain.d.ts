@@ -64,4 +64,8 @@ declare class Brain {
   count(collection: string): {
     recordCount: any;
   };
+
+  unwind(array: any, collection: string): void;
+
+  ImportCsv(path: string, collection: string): void;
 }
