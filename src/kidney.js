@@ -15,8 +15,6 @@ class Kidney {
         array.push(data);
       })
       .on("end", async () => {
-        console.log("CSV file successfully processed", array);
-
         const totalLength = array.length;
         const middleIndex = Math.floor(totalLength / 2);
         const firstPart = array.slice(0, middleIndex);
@@ -24,11 +22,9 @@ class Kidney {
         const writeToCollectionAsync = async (part) => {
           for (let index = 0; index < part.length; index++) {
             new Vessel().preCreate(collection);
-
             const match = new Vessel().read(collection);
             const array = [];
             const addedArray = [];
-
             if (match.trim() === "") {
               array.push({ id: Uuid.vectorized(), ...part[index] });
               new Vessel().write(array, collection);
@@ -36,7 +32,6 @@ class Kidney {
               const match = JSON.parse(new Vessel().read(collection));
               addedArray.push({ id: Uuid.vectorized(), ...part[index] });
               const finalArray = [...match, ...addedArray];
-              console.log(finalArray);
               new Vessel().write(finalArray, collection);
             }
           }

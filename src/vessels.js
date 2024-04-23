@@ -34,13 +34,7 @@ class Vessel {
 
   writeCsv(arrayOfObjects, collection) {
     const csvData = new heart().convertArrayOfObjectsToCsv(arrayOfObjects);
-    fs.writeFile(`./${collection}.csv`, csvData, (err) => {
-      if (err) {
-        console.error("Error writing CSV file:", err);
-      } else {
-        console.log("CSV file has been written successfully.");
-      }
-    });
+    fs.writeFile(`./${collection}.csv`, csvData);
   }
 }
 
