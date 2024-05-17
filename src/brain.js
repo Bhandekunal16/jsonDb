@@ -40,10 +40,7 @@ class Brain {
 
   getById(id, collection) {
     const array = JSON.parse(new Vessel().read(collection));
-    let response = [];
-    for (let index = 0; index < array.length; index++) {
-      array[index].id = id ? response.push(array[index]) : null;
-    }
+    let response = array.filter((record) => record.id === id);
     return { records: response, timestamp: new Date() };
   }
 
