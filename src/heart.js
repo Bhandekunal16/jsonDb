@@ -1,11 +1,8 @@
 class Heart {
   findSimilarProperties(obj1, obj2) {
-    const similarProperties = [];
-    for (const prop in obj1) {
-      if (obj2.hasOwnProperty(prop)) {
-        similarProperties.push(prop);
-      }
-    }
+    const similarProperties = Object.keys(obj1).filter((prop) =>
+      obj2.hasOwnProperty(prop)
+    );
     return similarProperties;
   }
 
