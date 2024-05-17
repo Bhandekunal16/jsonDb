@@ -19,12 +19,13 @@ class Heart {
   findSimilarObject(Array, Obj) {
     try {
       const array = Array;
-      let Object = [];
-      for (let index = 0; index < array.length; index++) {
-        const flag = this.compareObjects(array[index], Obj);
-        flag ? Object.push(array[index]) : console.log("i am not matched");
+      const matchedObjects = array.filter((item) =>
+        this.compareObjects(item, Obj)
+      );
+      if (matchedObjects.length === 0) {
+        console.log("No matches found");
       }
-      return { records: Object, length: Object.length, timeStamp: new Date() };
+      return { records: matchedObjects, length: Object.length, timeStamp: new Date() };
     } catch (error) {
       return error;
     }

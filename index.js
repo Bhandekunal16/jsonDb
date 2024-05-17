@@ -1,7 +1,10 @@
 const Application = require("./src/brain");
 
 function application() {
-  return new Application().getById("6e776c777266636a6b6a", "bank");
+  return new Application().getByProperties(
+    { id: "626e646e6b626678736a" },
+    "bank"
+  );
 }
 
 console.log(application());
