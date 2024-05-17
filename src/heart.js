@@ -10,10 +10,9 @@ class Heart {
   }
 
   compareObjects(obj1, obj2) {
-    for (let key in obj1) {
-      if (obj2.hasOwnProperty(key) && obj1[key] === obj2[key]) return true;
-    }
-    return false;
+    return Object.keys(obj1).some(
+      (key) => obj2.hasOwnProperty(key) && obj1[key] === obj2[key]
+    );
   }
 
   findSimilarObject(Array, Obj) {
@@ -25,7 +24,11 @@ class Heart {
       if (matchedObjects.length === 0) {
         console.log("No matches found");
       }
-      return { records: matchedObjects, length: Object.length, timeStamp: new Date() };
+      return {
+        records: matchedObjects,
+        length: Object.length,
+        timeStamp: new Date(),
+      };
     } catch (error) {
       return error;
     }
