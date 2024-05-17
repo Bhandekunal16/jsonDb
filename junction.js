@@ -22,27 +22,21 @@ class Junction {
   }
 
   heart(method, input) {
-    if (input.length == 1) {
-      return new Heart()[method](input[0]);
-    } else {
-      return new Heart()[method](input[0], input[1]);
-    }
+    return input.length == 1
+      ? new Heart()[method](input[0])
+      : new Heart()[method](input[0], input[1]);
   }
 
   kidney(method, input) {
-    if (input.length == 1) {
-      return new Kidney()[method](input[0]);
-    } else {
-      return new Kidney()[method](input[0], input[1]);
-    }
+    return input.length == 1
+      ? new Kidney()[method](input[0])
+      : new Kidney()[method](input[0], input[1]);
   }
 
   vessel(method, input) {
-    if (input.length == 1) {
-      return new Vessel()[method](input[0]);
-    } else {
-      return new Vessel()[method](input[0], input[1]);
-    }
+    return input.length == 1
+      ? new Vessel()[method](input[0])
+      : new Vessel()[method](input[0], input[1]);
   }
 }
 
