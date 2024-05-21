@@ -42,8 +42,5 @@ class Junction {
 
 module.exports = Junction;
 
-
-
-  // * How to use this junction
-  // ? new Junction()["brain"]("getById", ["706b7a6a6c796a687473", "bank"])
-
+// * How to use this junction
+// ? new Junction()["brain"]("getById", ["706b7a6a6c796a687473", "bank"])
