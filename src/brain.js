@@ -3,12 +3,24 @@ const Response = require("robotic.js/src/class/response");
 const Vessel = require("./vessels");
 const Heart = require("./heart");
 const kidney = require("./kidney");
+const { type } = require("os");
 
 class Brain {
   write(input, collection) {
     try {
+      if (input == undefined) {
+        throw new Error("parameter missing Input.");
+      }
+      if (collection == undefined) {
+        throw new Error("parameter missing collection name");
+      }
+      if (typeof collection == "number" || typeof collection == "boolean") {
+        throw new TypeError("type of collection name must be string.");
+      }
+
       new Vessel().preCreate(collection);
       const match = new Vessel().read(collection);
+
       const array = [];
       const addedArray = [];
       if (match.trim() === "") {
