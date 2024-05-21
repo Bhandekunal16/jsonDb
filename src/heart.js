@@ -15,7 +15,6 @@ class Heart {
         this.compareObjects(item, Obj)
       );
       if (matchedObjects.length === 0) console.log("No matches found");
-
       return {
         records: matchedObjects,
         length: Object.length,
