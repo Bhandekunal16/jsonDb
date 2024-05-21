@@ -12,7 +12,7 @@ function application() {
       occupation: "Software Developer",
       hobby: "Reading",
       favorite_food: "Pizza",
-      music_genre: "Rock",
+      music_genre: "Rock,pop",
       language: "English, Hindi",
       timezone: "GMT-5",
     },
