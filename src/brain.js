@@ -80,6 +80,9 @@ class Brain {
   }
 
   props(id, newObj, collection) {
+    if ((!id, !newObj, !collection))
+      throw new Error(`id, newObj, collection parameter are required`);
+
     const obj = this.getById(id, collection);
     const same = new Heart().findSimilarProperties(obj.records, newObj);
     same.forEach((key) => {
