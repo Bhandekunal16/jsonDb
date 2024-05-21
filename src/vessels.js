@@ -25,11 +25,7 @@ class Vessel {
   }
 
   read(collection) {
-    try {
-      return fs.readFileSync(`./${collection}.json`, "utf8");
-    } catch (error) {
-      return new Response().error(error);
-    }
+    return fs.readFileSync(`./${collection}.json`, "utf8");
   }
 
   writeCsv(arrayOfObjects, collection) {
