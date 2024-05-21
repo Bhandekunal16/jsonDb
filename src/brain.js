@@ -51,8 +51,10 @@ class Brain {
 
   getById(id, collection) {
     const array = JSON.parse(new Vessel().read(collection));
-    let response = array.filter((record) => record.id === id);
-    return { records: response, timestamp: new Date() };
+    return {
+      records: array.filter((record) => record.id === id),
+      timestamp: new Date(),
+    };
   }
 
   getByProperties(Object, collection) {
