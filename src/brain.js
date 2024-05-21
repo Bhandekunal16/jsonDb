@@ -67,6 +67,9 @@ class Brain {
   }
 
   edit(id, input, value, collection) {
+    if (!id || !input || !value || !collection)
+      throw new Error("id, input, value, collection parameter are  required");
+
     let array = JSON.parse(new Vessel().read(collection));
     let targetObjIndex = array.findIndex((obj) => obj.id === id);
     if (targetObjIndex !== -1) {
