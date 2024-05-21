@@ -3,7 +3,6 @@ const Response = require("robotic.js/src/class/response");
 const Vessel = require("./vessels");
 const Heart = require("./heart");
 const kidney = require("./kidney");
-const { type } = require("os");
 
 class Brain {
   write(input, collection) {
