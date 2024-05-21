@@ -1,8 +1,11 @@
 const uuid = require("robotic.js/src/class/uuid");
 const Response = require("robotic.js/src/class/response");
-const Vessel = require("./vessels");
-const Heart = require("./heart");
-const kidney = require("./kidney");
+
+const [Vessel, Heart, kidney] = [
+  require("./vessels"),
+  require("./heart"),
+  require("./kidney"),
+];
 
 class Brain {
   write(input, collection) {
