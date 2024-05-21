@@ -32,9 +32,7 @@ class Heart {
   }
 
   convertArrayOfObjectsToCsv(arrayOfObjects) {
-    if (arrayOfObjects.length === 0) {
-      return "";
-    }
+    if (arrayOfObjects.length === 0) return "";
     const headers = Object.keys(arrayOfObjects[0]);
     const csvRows = [];
     csvRows.push(headers.join(","));
