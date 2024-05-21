@@ -14,7 +14,7 @@ declare class UUID {
      * @param {number} length - optional parameter if want a specific length of the uuid, default is 10.
      * @function - numeric uuid generation operations
      * @returns - numeric uuid*/
-    numeric(length?: number): string;
+    numeric(length: number): string;
     /**
      * @function - give the vectorized uuid string.
      * @returns -  returns vectorized uuid string
