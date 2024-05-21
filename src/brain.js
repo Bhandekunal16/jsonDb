@@ -10,10 +10,9 @@ class Brain {
     try {
       const [array, addedArray] = [[], []];
 
-      if (input == undefined) throw new Error("parameter missing Input.");
+      if (!input) throw new Error("parameter missing Input.");
 
-      if (collection == undefined)
-        throw new Error("parameter missing collection name");
+      if (!collection) throw new Error("parameter missing collection name");
 
       if (typeof collection == "number" || typeof collection == "boolean")
         throw new TypeError(
