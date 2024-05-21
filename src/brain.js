@@ -9,19 +9,14 @@ class Brain {
   write(input, collection) {
     try {
       const [array, addedArray] = [[], []];
-
       if (!input) throw new Error("parameter missing Input.");
-
       if (!collection) throw new Error("parameter missing collection name");
-
       if (typeof collection == "number" || typeof collection == "boolean")
         throw new TypeError(
           `current collection name type is ${typeof collection} expected type is string.`
         );
-
       new Vessel().preCreate(collection);
       const match = new Vessel().read(collection);
-
       if (match.trim() === "") {
         array.push({ id: new uuid().vectorized(), ...input });
         new Vessel().write(array, collection);
@@ -39,7 +34,6 @@ class Brain {
   read(collection) {
     try {
       if (!collection) throw new Error("parameter missing collection name.");
-
       return {
         records: JSON.parse(new Vessel().read(collection)),
         length: JSON.parse(new Vessel().read(collection)).length,
@@ -53,7 +47,6 @@ class Brain {
   getById(id, collection) {
     if (!id || !collection)
       throw new Error("Both 'id' and 'collection' parameters are required.");
-
     const array = JSON.parse(new Vessel().read(collection));
     return {
       records: array.filter((record) => record.id === id),
@@ -64,7 +57,6 @@ class Brain {
   getByProperties(Object, collection) {
     if (!Object || !collection)
       throw new Error(`object, collection this parameter are required.`);
-
     const array = JSON.parse(new Vessel().read(collection));
     return new Heart().findSimilarObject(array, Object);
   }
@@ -72,7 +64,6 @@ class Brain {
   edit(id, input, value, collection) {
     if (!id || !input || !value || !collection)
       throw new Error("id, input, value, collection parameter are  required");
-
     let array = JSON.parse(new Vessel().read(collection));
     let targetObjIndex = array.findIndex((obj) => obj.id === id);
     if (targetObjIndex !== -1) {
@@ -85,7 +76,6 @@ class Brain {
   props(id, newObj, collection) {
     if (!id || !newObj || !collection)
       throw new Error(`id, newObj, collection parameter are required`);
-
     const obj = this.getById(id, collection);
     const same = new Heart().findSimilarProperties(obj.records, newObj);
     same.forEach((key) => {
@@ -102,12 +92,10 @@ class Brain {
   async unwind(array, collection) {
     if (!array || !collection)
       throw new Error("array & collection this parameter are required.");
-
     const totalLength = array.length;
     const middleIndex = Math.floor(totalLength / 2);
     const firstPart = array.slice(0, middleIndex);
     const secondPart = array.slice(middleIndex);
-
     const writeToCollectionAsync = async (part) => {
       for (let index = 0; index < part.length; index++) {
         await this.write(part[index], collection);
