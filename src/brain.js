@@ -40,10 +40,9 @@ class Brain {
 
   read(collection) {
     try {
-      const data = JSON.parse(new Vessel().read(collection));
       return {
-        records: data,
-        length: data.length,
+        records: JSON.parse(new Vessel().read(collection)),
+        length: JSON.parse(new Vessel().read(collection)).length,
         timestamp: new Date(),
       };
     } catch (error) {
