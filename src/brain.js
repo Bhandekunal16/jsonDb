@@ -81,7 +81,7 @@ class Brain {
     if (!id || !newObj || !collection)
       throw new Error(`id, newObj, collection parameter are required`);
     const obj = this.getById(id, collection);
-    const same = new Heart().findSimilarProperties(obj.records, newObj);
+    const same = new Heart().findSimilarProperties(obj.records[0], newObj);
     same.forEach((key) => {
       const value = newObj[key];
       this.edit(id, key, value, collection);
