@@ -38,6 +38,8 @@ class Brain {
 
   read(collection) {
     try {
+      if (!collection) throw new Error("parameter missing Input.");
+
       return {
         records: JSON.parse(new Vessel().read(collection)),
         length: JSON.parse(new Vessel().read(collection)).length,
