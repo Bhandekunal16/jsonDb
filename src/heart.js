@@ -11,13 +11,11 @@ class Heart {
 
   findSimilarObject(Array, Obj) {
     try {
-      const array = Array;
-      const matchedObjects = array.filter((item) =>
+      const matchedObjects = Array.filter((item) =>
         this.compareObjects(item, Obj)
       );
-      if (matchedObjects.length === 0) {
-        console.log("No matches found");
-      }
+      if (matchedObjects.length === 0) console.log("No matches found");
+
       return {
         records: matchedObjects,
         length: Object.length,
