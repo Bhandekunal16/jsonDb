@@ -50,6 +50,9 @@ class Brain {
   }
 
   getById(id, collection) {
+    if (!id || !collection)
+      throw new Error("Both 'id' and 'collection' parameters are required.");
+
     const array = JSON.parse(new Vessel().read(collection));
     return {
       records: array.filter((record) => record.id === id),
