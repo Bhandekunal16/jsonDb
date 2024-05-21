@@ -100,6 +100,9 @@ class Brain {
   }
 
   async unwind(array, collection) {
+    if (!array || !collection)
+      throw new Error("array & collection this parameter are required.");
+
     const totalLength = array.length;
     const middleIndex = Math.floor(totalLength / 2);
     const firstPart = array.slice(0, middleIndex);
