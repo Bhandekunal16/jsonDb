@@ -8,6 +8,9 @@ const { type } = require("os");
 class Brain {
   write(input, collection) {
     try {
+      const array = [];
+      const addedArray = [];
+      
       if (input == undefined) {
         throw new Error("parameter missing Input.");
       }
@@ -21,8 +24,6 @@ class Brain {
       new Vessel().preCreate(collection);
       const match = new Vessel().read(collection);
 
-      const array = [];
-      const addedArray = [];
       if (match.trim() === "") {
         array.push({ id: new uuid().vectorized(), ...input });
         new Vessel().write(array, collection);
