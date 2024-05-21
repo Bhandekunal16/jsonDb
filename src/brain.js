@@ -1,5 +1,7 @@
-const uuid = require("robotic.js/src/class/uuid");
-const Response = require("robotic.js/src/class/response");
+const [uuid, Response] = [
+  require("robotic.js/src/class/uuid"),
+  require("robotic.js/src/class/response"),
+];
 
 const [Vessel, Heart, kidney] = [
   require("./vessels"),
