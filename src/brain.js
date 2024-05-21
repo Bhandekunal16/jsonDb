@@ -10,7 +10,7 @@ class Brain {
     try {
       const array = [];
       const addedArray = [];
-      
+
       if (input == undefined) {
         throw new Error("parameter missing Input.");
       }
