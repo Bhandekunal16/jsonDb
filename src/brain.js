@@ -123,7 +123,6 @@ class Brain {
   ImportCsv(path, collection) {
     if (!path || !collection)
       throw new Error("path & collection this parameter are required.");
-
     new kidney().readCsv(path, collection);
   }
 
