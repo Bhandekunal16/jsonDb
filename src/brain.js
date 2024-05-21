@@ -8,8 +8,7 @@ const { type } = require("os");
 class Brain {
   write(input, collection) {
     try {
-      const array = [];
-      const addedArray = [];
+      const [array, addedArray] = [[], []];
 
       if (input == undefined) {
         throw new Error("parameter missing Input.");
