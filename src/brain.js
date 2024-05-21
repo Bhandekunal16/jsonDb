@@ -10,15 +10,15 @@ class Brain {
     try {
       const [array, addedArray] = [[], []];
 
-      if (input == undefined) {
-        throw new Error("parameter missing Input.");
-      }
-      if (collection == undefined) {
+      if (input == undefined) throw new Error("parameter missing Input.");
+
+      if (collection == undefined)
         throw new Error("parameter missing collection name");
-      }
-      if (typeof collection == "number" || typeof collection == "boolean") {
-        throw new TypeError("type of collection name must be string.");
-      }
+
+      if (typeof collection == "number" || typeof collection == "boolean")
+        throw new TypeError(
+          `current collection name type is ${typeof collection} expected type is string.`
+        );
 
       new Vessel().preCreate(collection);
       const match = new Vessel().read(collection);
