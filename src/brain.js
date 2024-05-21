@@ -121,10 +121,15 @@ class Brain {
   }
 
   ImportCsv(path, collection) {
+    if (!path || !collection)
+      throw new Error("path & collection this parameter are required.");
+
     new kidney().readCsv(path, collection);
   }
 
   ExportCsv(collection) {
+    if (!collection)
+      throw new Error("collection name is parameter is require.");
     const array = new Vessel().read(collection);
     new Vessel().writeCsv(JSON.parse(array), collection);
   }
