@@ -5,3 +5,10 @@ bank.csv
 creater.js
 bank.xlsx
 index.js
+
+
+# echo "index.js" >> .gitignore  # Add index.js to .gitignore
+# git rm --cached index.js       # Remove index.js from the Git index
+# git add .gitignore             # Add the updated .gitignore
+# git commit -m "Add index.js to .gitignore"  # Commit the changes
+# git status                     # Verify index.js is ignored
