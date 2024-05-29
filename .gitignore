@@ -1,6 +1,6 @@
 bank.json
 phone.json
-node_modules
+node_modules/
 bank.csv
 creater.js
 bank.xlsx
