@@ -5,43 +5,42 @@ const [Brain, Heart, Kidney, Vessel] = [
   require("./src/vessels"),
 ];
 
-class Junction {
-  constructor() {
-    this.obj = {
-      brain: Brain,
-      heart: Heart,
-      kidney: Kidney,
-      vessel: Vessel,
-    };
-  }
-
+class Core {
   brain(method, input) {
-    return input.length == 1
-      ? new Brain()[method](input[0])
-      : new Brain()[method](input[0], input[1]);
+    try {
+      return new Brain()[method](...input);
+    } catch (error) {
+      return new Error("invalid method : " + error);
+    }
   }
 
   heart(method, input) {
-    return input.length == 1
-      ? new Heart()[method](input[0])
-      : new Heart()[method](input[0], input[1]);
+    try {
+      return new Heart()[method](...input);
+    } catch (error) {
+      return new Error("invalid method : " + error);
+    }
   }
 
   kidney(method, input) {
-    return input.length == 1
-      ? new Kidney()[method](input[0])
-      : new Kidney()[method](input[0], input[1]);
+    try {
+      return new Kidney()[method](...input);
+    } catch (error) {
+      return new Error("invalid method : " + error);
+    }
   }
 
   vessel(method, input) {
-    return input.length == 1
-      ? new Vessel()[method](input[0])
-      : new Vessel()[method](input[0], input[1]);
+    try {
+      return new Vessel()[method](...input);
+    } catch (error) {
+      return new Error("invalid method : " + error);
+    }
   }
 }
 
-module.exports = Junction;
+module.exports = Core;
 
-// ** How to use this junction
-// ? new Junction()["brain"]("getById", ["706b7a6a6c796a687473", "bank"])
-// ** console.log(new Junction()["brain"]("read", ["bank"]));
+// ** How to use this Core
+// ? new Core()["brain"]("getById", ["706b7a6a6c796a687473", "bank"])
+// ** console.log(new Core()["brain"]("read", ["bank"]));
