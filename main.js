@@ -1,14 +1,24 @@
-const [Brain, Heart, Kidney, Vessel] = [
-  require("./src/brain"),
-  require("./src/heart"),
-  require("./src/kidney"),
-  require("./src/vessels"),
-];
-
 class Core {
+  application() {
+    const moduleNames = ["Brain", "Heart", "Kidney", "Vessel"];
+    const modulePaths = [
+      "./src/brain",
+      "./src/heart",
+      "./src/kidney",
+      "./src/vessels",
+    ];
+
+    let modules = [];
+    for (let index = 0; index < moduleNames.length; index++) {
+      modules.push((moduleNames[index] = require(modulePaths[index])));
+    }
+    return modules;
+  }
+
   brain(method, input) {
     try {
-      return new Brain()[method](...input);
+      const Host = this.application()[0];
+      return new Host()[method](...input);
     } catch (error) {
       return new Error("invalid method : " + error);
     }
@@ -16,7 +26,8 @@ class Core {
 
   heart(method, input) {
     try {
-      return new Heart()[method](...input);
+      const Host = this.application()[1];
+      return new Host()[method](...input);
     } catch (error) {
       return new Error("invalid method : " + error);
     }
@@ -24,7 +35,8 @@ class Core {
 
   kidney(method, input) {
     try {
-      return new Kidney()[method](...input);
+      const Host = this.application()[2];
+      return new Host()[2][method](...input);
     } catch (error) {
       return new Error("invalid method : " + error);
     }
@@ -32,7 +44,8 @@ class Core {
 
   vessel(method, input) {
     try {
-      return new Vessel()[method](...input);
+      const Host = this.application()[2];
+      return new Host[3][method](...input);
     } catch (error) {
       return new Error("invalid method : " + error);
     }
