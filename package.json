@@ -1,6 +1,6 @@
 {
   "name": "roboticdb",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "easy to use self integrity database",
   "main": "index.js",
   "dependencies": {
