@@ -47,4 +47,4 @@ module.exports = Core;
 // ? new Core()["brain"]("getById", ["706b7a6a6c796a687473", "bank"])
 // ** console.log(new Core()["brain"]("read", ["bank"]));
 
-new Core()["brain"]("write", [{ name: "kunal" }, "information"]);
+// new Core()["brain"]("write", [{ name: "kunal" }, "information"]);
