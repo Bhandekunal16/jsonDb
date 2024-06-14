@@ -15,10 +15,14 @@ class Core {
     return modules;
   }
 
+  invoke(index, method, input) {
+    const Host = this.application()[index];
+    return new Host()[method](...input);
+  }
+
   brain(method, input) {
     try {
-      const Host = this.application()[0];
-      return new Host()[method](...input);
+      return this.invoke(0, method, input);
     } catch (error) {
       return new Error("invalid method : " + error);
     }
@@ -26,8 +30,7 @@ class Core {
 
   heart(method, input) {
     try {
-      const Host = this.application()[1];
-      return new Host()[method](...input);
+      return this.invoke(1, method, input);
     } catch (error) {
       return new Error("invalid method : " + error);
     }
@@ -35,8 +38,7 @@ class Core {
 
   kidney(method, input) {
     try {
-      const Host = this.application()[2];
-      return new Host()[2][method](...input);
+      return this.invoke(2, method, input);
     } catch (error) {
       return new Error("invalid method : " + error);
     }
@@ -44,8 +46,7 @@ class Core {
 
   vessel(method, input) {
     try {
-      const Host = this.application()[2];
-      return new Host[3][method](...input);
+      return this.invoke(3, method, input);
     } catch (error) {
       return new Error("invalid method : " + error);
     }
@@ -57,3 +58,5 @@ module.exports = Core;
 // ** How to use this Core
 // ? new Core()["brain"]("getById", ["706b7a6a6c796a687473", "bank"])
 // ** console.log(new Core()["brain"]("read", ["bank"]));
+
+new Core()["brain"]("write", [{ name: "kunal" }, "information"]);
