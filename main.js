@@ -16,40 +16,28 @@ class Core {
   }
 
   invoke(index, method, input) {
-    const Host = this.application()[index];
-    return new Host()[method](...input);
+    try {
+      const Host = this.application()[index];
+      return new Host()[method](...input);
+    } catch (error) {
+      return new Error("invalid method : " + error);
+    }
   }
 
   brain(method, input) {
-    try {
-      return this.invoke(0, method, input);
-    } catch (error) {
-      return new Error("invalid method : " + error);
-    }
+    return this.invoke(0, method, input);
   }
 
   heart(method, input) {
-    try {
-      return this.invoke(1, method, input);
-    } catch (error) {
-      return new Error("invalid method : " + error);
-    }
+    return this.invoke(1, method, input);
   }
 
   kidney(method, input) {
-    try {
-      return this.invoke(2, method, input);
-    } catch (error) {
-      return new Error("invalid method : " + error);
-    }
+    return this.invoke(2, method, input);
   }
 
   vessel(method, input) {
-    try {
-      return this.invoke(3, method, input);
-    } catch (error) {
-      return new Error("invalid method : " + error);
-    }
+    return this.invoke(3, method, input);
   }
 }
 
