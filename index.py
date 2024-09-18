@@ -85,5 +85,9 @@ class brain:
                 Vessel().write(collection, value)
     
     def truncate(self, collection):
-        Vessel().clear(collection)        
-
+        Vessel().clear(collection)
+        
+    def delete(self, collection, id):
+        value = Vessel().read(collection)
+        filtered_data = [item for item in value if item.get('id') != id]
+        Vessel().write(collection, filtered_data)
