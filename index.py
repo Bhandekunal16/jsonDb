@@ -95,3 +95,6 @@ class brain:
     def count(self, collection):
         value = Vessel().read(collection)
         return {"length": len(value)}
+
+    def export_csv(self, collection):
+        Vessel().export_csv(collection)
