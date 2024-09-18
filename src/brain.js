@@ -125,9 +125,19 @@ class Brain {
     new Vessel().writeCsv(JSON.parse(array), collection);
   }
 
-  Truncate(collection) {
+  truncate(collection) {
     try {
       new Vessel().clear(collection);
+    } catch (error) {
+      return new Error(error);
+    }
+  }
+
+  delete(collection, id) {
+    try {
+      const read = JSON.parse(new Vessel().read(collection));
+      const remove = read.filter((obj) => obj.id !== id);
+      new Vessel().write(remove, collection);
     } catch (error) {
       return new Error(error);
     }
