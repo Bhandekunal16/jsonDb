@@ -83,3 +83,7 @@ class brain:
             if target_index != -1:
                 value[target_index][key] = values
                 Vessel().write(collection, value)
+    
+    def truncate(self, collection):
+        Vessel().clear(collection)        
+
