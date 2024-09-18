@@ -83,16 +83,15 @@ class brain:
             if target_index != -1:
                 value[target_index][key] = values
                 Vessel().write(collection, value)
-    
+
     def truncate(self, collection):
         Vessel().clear(collection)
-        
+
     def delete(self, collection, id):
         value = Vessel().read(collection)
-        filtered_data = [item for item in value if item.get('id') != id]
+        filtered_data = [item for item in value if item.get("id") != id]
         Vessel().write(collection, filtered_data)
-        
+
     def count(self, collection):
         value = Vessel().read(collection)
-        return {'length' : len(value)}
-    
+        return {"length": len(value)}
