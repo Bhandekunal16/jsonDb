@@ -124,6 +124,14 @@ class Brain {
     const array = new Vessel().read(collection);
     new Vessel().writeCsv(JSON.parse(array), collection);
   }
+
+  Truncate(collection) {
+    try {
+      new Vessel().clear(collection);
+    } catch (error) {
+      return new Error(error);
+    }
+  }
 }
 
 module.exports = Brain;

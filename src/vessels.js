@@ -1,6 +1,9 @@
 const fs = require("fs");
-const Response = require("robotic.js/src/class/response");
 const heart = require("./heart");
+const [Response, Logger] = [
+  require("robotic.js/src/class/response"),
+  require("robotic.js/src/interface/Logger"),
+];
 
 class Vessel {
   fileName = `./db.json`;
@@ -9,6 +12,7 @@ class Vessel {
     try {
       this.preCreate(collection);
       fs.writeFileSync(`./${collection}.json`, JSON.stringify(input));
+      new Logger().log("your object added successfully !");
     } catch (error) {
       return new Response().error(error);
     }
@@ -36,10 +40,17 @@ class Vessel {
     const csvData = new heart().convertArrayOfObjectsToCsv(arrayOfObjects);
     fs.writeFile(`./${collection}.csv`, csvData, "utf8", (err) => {
       if (err) {
-        console.error(`Error writing CSV file at ./${collection}.csv:`, err);
+        new Logger().error(`Error writing CSV file at ./${collection}.csv:`, err);
       } else {
-        console.log(`CSV file successfully written at ${collection}`);
+        new Logger().log(`CSV file successfully written at ${collection}`);
       }
+    });
+  }
+
+  clear(collection) {
+    fs.writeFile(`./${collection}.json`, "", (err) => {
+      if (err) throw new Error(err);
+      new Logger().log("your data will cleared successfully!");
     });
   }
 }
