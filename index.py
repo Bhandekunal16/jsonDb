@@ -91,3 +91,8 @@ class brain:
         value = Vessel().read(collection)
         filtered_data = [item for item in value if item.get('id') != id]
         Vessel().write(collection, filtered_data)
+        
+    def count(self, collection):
+        value = Vessel().read(collection)
+        return {'length' : len(value)}
+    
