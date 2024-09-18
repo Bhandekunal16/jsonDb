@@ -1,4 +1,3 @@
-/**class that contain time stamp for the logging.*/
 class Timestamp {
   constructor() {
     this.min = new Date().getMinutes();
@@ -6,12 +5,8 @@ class Timestamp {
     this.mild = new Date().getMilliseconds();
   }
 
-  /**
-   * @function - time stamp constructor
-   * @returns {string} - returns time stamp string*/
   main() {
-    const timestamp = `${this.min}${this.mild}${this.sec}`;
-    return timestamp;
+    return `${this.min}${this.mild}${this.sec}`;
   }
 }
 

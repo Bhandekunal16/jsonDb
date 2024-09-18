@@ -9,9 +9,6 @@ class Response {
     this.BadGateway = "bad gateway";
     this.ServiceUnavailable = "service unavailable";
   }
-
-  // message, process
-
   error(res, message, process) {
     process != undefined ? process.status(500) : null;
     const msg = message != undefined ? this.Error : message;
