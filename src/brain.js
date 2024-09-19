@@ -89,7 +89,7 @@ class Brain {
   }
 
   count(collection) {
-    if (!condition) throw new Error("collection name parameter is missing");
+    if (!collection) throw new Error("collection name parameter is missing");
     return { recordCount: this.read(collection).length };
   }
 
