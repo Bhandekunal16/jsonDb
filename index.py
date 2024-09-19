@@ -93,7 +93,7 @@ class brain:
         Vessel().write(collection, filtered_data)
 
     def count(self, collection):
-        value = Vessel().read(collection)
+        value : list = Vessel().read(collection)
         return {"length": len(value)}
 
     def export_csv(self, collection):
