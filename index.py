@@ -35,6 +35,7 @@ class Vessel:
 
 class brain:
     def write(self, collection, data):
+        os.makedirs(os.path.dirname(f"../{collection}.json"), exist_ok=True)
         value = Vessel().read(collection)
         if value.__le__ == 0:
             Vessel().write(collection, data)
