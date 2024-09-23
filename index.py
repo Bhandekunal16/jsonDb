@@ -1,15 +1,16 @@
-import json, csv, uuid
+import json, csv, uuid, os
 
 
 class Vessel:
     def write(self, collection, content):
         json_content = json.dumps(content, indent=4)
-        with open(f"./{collection}.json", "w") as file:
+        os.makedirs(os.path.dirname(f"../{collection}.json"), exist_ok=True)
+        with open(f"../{collection}.json", "w") as file:
             file.write(json_content)
             print(f"Your collection created with {collection} as the name")
 
     def read(self, collection):
-        with open(f"./{collection}.json", "r") as file:
+        with open(f"../{collection}.json", "r") as file:
             content = file.read()
             if content == "":
                 return []
@@ -17,12 +18,12 @@ class Vessel:
                 return json.loads(content)
 
     def clear(self, collection):
-        with open(f"./{collection}.json", "w") as file:
+        with open(f"../{collection}.json", "w") as file:
             file.write("")
             print("collection cleared successfully")
 
     def export_csv(self, collection):
-        with open(f"./{collection}.json", "r") as file:
+        with open(f"../{collection}.json", "r") as file:
             data = json.loads(file.read())
             with open("output.csv", "w", newline="") as files:
                 headers = data[0].keys()
@@ -93,7 +94,7 @@ class brain:
         Vessel().write(collection, filtered_data)
 
     def count(self, collection):
-        value : list = Vessel().read(collection)
+        value: list = Vessel().read(collection)
         return {"length": len(value)}
 
     def export_csv(self, collection):
