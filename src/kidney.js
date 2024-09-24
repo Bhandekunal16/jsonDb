@@ -50,7 +50,7 @@ class Kidney {
         ]);
       })
       .on("error", (error) => {
-        console.error("Error encountered while processing CSV:", error);
+        throw new Error("Error encountered while processing CSV:", error);
       });
   }
 }
