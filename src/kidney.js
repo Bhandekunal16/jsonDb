@@ -2,9 +2,16 @@ const csv = require("fast-csv");
 const fs = require("fs");
 const Vessel = require("./vessels");
 const uuid = require("robotic.js/src/class/uuid");
-const Uuid = new uuid();
 
 class Kidney {
+  #Uuid;
+  #vessel;
+
+  constructor() {
+    this.#Uuid = new uuid();
+    this.#vessel = new Vessel();
+  }
+
   readCsv(path, collection) {
     const stream = fs.createReadStream(path);
     const array = [];
@@ -21,18 +28,18 @@ class Kidney {
         const secondPart = array.slice(middleIndex);
         const writeToCollectionAsync = async (part) => {
           for (let index = 0; index < part.length; index++) {
-            new Vessel().preCreate(collection);
-            const match = new Vessel().read(collection);
+            this.#vessel.preCreate(collection);
+            const match = this.#vessel.read(collection);
             const array = [];
             const addedArray = [];
             if (match.trim() === "") {
-              array.push({ id: Uuid.vectorized(), ...part[index] });
-              new Vessel().write(array, collection);
+              array.push({ id: this.#Uuid.vectorized(), ...part[index] });
+              this.#vessel.write(array, collection);
             } else {
-              const match = JSON.parse(new Vessel().read(collection));
-              addedArray.push({ id: Uuid.vectorized(), ...part[index] });
+              const match = JSON.parse(this.#vessel.read(collection));
+              addedArray.push({ id: this.#Uuid.vectorized(), ...part[index] });
               const finalArray = [...match, ...addedArray];
-              new Vessel().write(finalArray, collection);
+              this.#vessel.write(finalArray, collection);
             }
           }
         };
