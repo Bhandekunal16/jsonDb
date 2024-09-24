@@ -10,6 +10,20 @@ const [Vessel, Heart, kidney] = [
 ];
 
 class Brain {
+  #vessel;
+  #heart;
+  #kidney;
+  #uuid;
+  #response;
+
+  constructor() {
+    this.#vessel = new Vessel();
+    this.#heart = new Heart();
+    this.#kidney = new kidney();
+    this.#uuid = new uuid();
+    this.#response = new Response();
+  }
+
   write(input, collection) {
     try {
       const [array, addedArray] = [[], []];
@@ -19,19 +33,19 @@ class Brain {
         throw new TypeError(
           `current collection name type is ${typeof collection} expected type is string.`
         );
-      new Vessel().preCreate(collection);
-      const match = new Vessel().read(collection);
+      this.#vessel.preCreate(collection);
+      const match = this.#vessel.read(collection);
       if (match.trim() === "") {
-        array.push({ id: new uuid().vectorized(), ...input });
-        new Vessel().write(array, collection);
+        array.push({ id: this.#uuid.vectorized(), ...input });
+        this.#vessel.write(array, collection);
       } else {
-        const match = JSON.parse(new Vessel().read(collection));
-        addedArray.push({ id: new uuid().vectorized(), ...input });
+        const match = JSON.parse(this.#vessel.read(collection));
+        addedArray.push({ id: this.#uuid.vectorized(), ...input });
         const finalArray = [...match, ...addedArray];
-        new Vessel().write(finalArray, collection);
+        this.#vessel.write(finalArray, collection);
       }
     } catch (error) {
-      return new Response().error(error);
+      return this.#response.error(error);
     }
   }
 
@@ -39,19 +53,19 @@ class Brain {
     try {
       if (!collection) throw new Error("parameter missing collection name.");
       return {
-        records: JSON.parse(new Vessel().read(collection)),
-        length: JSON.parse(new Vessel().read(collection)).length,
+        records: JSON.parse(this.#vessel.read(collection)),
+        length: JSON.parse(this.#vessel.read(collection)).length,
         timestamp: new Date(),
       };
     } catch (error) {
-      return new Response().error(error);
+      return this.#response.error(error);
     }
   }
 
   getById(id, collection) {
     if (!id || !collection)
       throw new Error("Both 'id' and 'collection' parameters are required.");
-    const array = JSON.parse(new Vessel().read(collection));
+    const array = JSON.parse(this.#vessel.read(collection));
     return {
       records: array.filter((record) => record.id === id),
       timestamp: new Date(),
@@ -61,27 +75,27 @@ class Brain {
   getByProperties(Object, collection) {
     if (!Object || !collection)
       throw new Error(`object, collection this parameter are required.`);
-    const array = JSON.parse(new Vessel().read(collection));
-    return new Heart().findSimilarObject(array, Object);
+    const array = JSON.parse(this.#vessel.read(collection));
+    return this.#heart.findSimilarObject(array, Object);
   }
 
   edit(id, input, value, collection) {
     if (!id || !input || !value || !collection)
       throw new Error("id, input, value, collection parameter are  required");
-    let array = JSON.parse(new Vessel().read(collection));
+    let array = JSON.parse(this.#vessel.read(collection));
     let targetObjIndex = array.findIndex((obj) => obj.id === id);
     if (targetObjIndex !== -1) {
       array[targetObjIndex][input] = value;
-      new Vessel().write(array, collection);
+      this.#vessel.write(array, collection);
     } else
-      return new Response().notFound("Object with specified id not found.");
+      return this.#response.notFound("Object with specified id not found.");
   }
 
   props(id, newObj, collection) {
     if (!id || !newObj || !collection)
       throw new Error(`id, newObj, collection parameter are required`);
     const obj = this.getById(id, collection);
-    const same = new Heart().findSimilarProperties(obj.records[0], newObj);
+    const same = this.#heart.findSimilarProperties(obj.records[0], newObj);
     same.forEach((key) => {
       const value = newObj[key];
       this.edit(id, key, value, collection);
@@ -115,19 +129,19 @@ class Brain {
   ImportCsv(path, collection) {
     if (!path || !collection)
       throw new Error("path & collection this parameter are required.");
-    new kidney().readCsv(path, collection);
+    this.#kidney.readCsv(path, collection);
   }
 
   ExportCsv(collection) {
     if (!collection)
       throw new Error("collection name is parameter is require.");
-    const array = new Vessel().read(collection);
-    new Vessel().writeCsv(JSON.parse(array), collection);
+    const array = this.#vessel.read(collection);
+    this.#vessel.writeCsv(JSON.parse(array), collection);
   }
 
   truncate(collection) {
     try {
-      new Vessel().clear(collection);
+      this.#vessel.clear(collection);
     } catch (error) {
       return new Error(error);
     }
@@ -135,9 +149,9 @@ class Brain {
 
   delete(collection, id) {
     try {
-      const read = JSON.parse(new Vessel().read(collection));
+      const read = JSON.parse(this.#vessel.read(collection));
       const remove = read.filter((obj) => obj.id !== id);
-      new Vessel().write(remove, collection);
+      this.#vessel.write(remove, collection);
     } catch (error) {
       return new Error(error);
     }
