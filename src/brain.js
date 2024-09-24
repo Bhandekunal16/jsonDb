@@ -45,7 +45,7 @@ class Brain {
         this.#vessel.write(finalArray, collection);
       }
     } catch (error) {
-      return this.#response.error(error);
+      throw this.#response.error(error);
     }
   }
 
@@ -58,7 +58,7 @@ class Brain {
         timestamp: new Date(),
       };
     } catch (error) {
-      return this.#response.error(error);
+      throw this.#response.error(error);
     }
   }
 
@@ -143,7 +143,7 @@ class Brain {
     try {
       this.#vessel.clear(collection);
     } catch (error) {
-      return new Error(error);
+      throw new Error(error);
     }
   }
 
@@ -153,7 +153,7 @@ class Brain {
       const remove = read.filter((obj) => obj.id !== id);
       this.#vessel.write(remove, collection);
     } catch (error) {
-      return new Error(error);
+      throw new Error(error);
     }
   }
 }
