@@ -24,7 +24,7 @@ class Brain {
     this.#response = new Response();
   }
 
-  write(input, collection) {
+  async write(input, collection) {
     try {
       const [array, addedArray] = [[], []];
       if (!input) throw new Error("parameter missing Input.");
@@ -35,11 +35,12 @@ class Brain {
         );
       this.#vessel.preCreate(collection);
       const match = this.#vessel.read(collection);
-      if (match.trim() === "") {
+      console.log(match);
+      if (match.length == 0) {
         array.push({ id: this.#uuid.vectorized(), ...input });
         this.#vessel.write(array, collection);
       } else {
-        const match = JSON.parse(this.#vessel.read(collection));
+        const match = await this.#vessel.read(collection);
         addedArray.push({ id: this.#uuid.vectorized(), ...input });
         const finalArray = [...match, ...addedArray];
         this.#vessel.write(finalArray, collection);
@@ -53,8 +54,8 @@ class Brain {
     try {
       if (!collection) throw new Error("parameter missing collection name.");
       return {
-        records: JSON.parse(this.#vessel.read(collection)),
-        length: JSON.parse(this.#vessel.read(collection)).length,
+        records: this.#vessel.read(collection),
+        length: this.#vessel.read(collection).length,
         timestamp: new Date(),
       };
     } catch (error) {
@@ -65,7 +66,7 @@ class Brain {
   getById(id, collection) {
     if (!id || !collection)
       throw new Error("Both 'id' and 'collection' parameters are required.");
-    const array = JSON.parse(this.#vessel.read(collection));
+    const array = this.#vessel.read(collection);
     return {
       records: array.filter((record) => record.id === id),
       timestamp: new Date(),
@@ -75,14 +76,14 @@ class Brain {
   getByProperties(Object, collection) {
     if (!Object || !collection)
       throw new Error(`object, collection this parameter are required.`);
-    const array = JSON.parse(this.#vessel.read(collection));
+    const array = this.#vessel.read(collection);
     return this.#heart.findSimilarObject(array, Object);
   }
 
   edit(id, input, value, collection) {
     if (!id || !input || !value || !collection)
       throw new Error("id, input, value, collection parameter are  required");
-    let array = JSON.parse(this.#vessel.read(collection));
+    let array = this.#vessel.read(collection);
     let targetObjIndex = array.findIndex((obj) => obj.id === id);
     if (targetObjIndex !== -1) {
       array[targetObjIndex][input] = value;
@@ -149,7 +150,7 @@ class Brain {
 
   delete(collection, id) {
     try {
-      const read = JSON.parse(this.#vessel.read(collection));
+      const read = this.#vessel.read(collection);
       const remove = read.filter((obj) => obj.id !== id);
       this.#vessel.write(remove, collection);
     } catch (error) {
